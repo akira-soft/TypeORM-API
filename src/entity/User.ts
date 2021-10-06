@@ -1,8 +1,8 @@
-import { IsDate, IsEmail, IsInt, IsNotEmpty, IsString, MinLength } from "class-validator";
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { IsDateString, IsEmail, IsInt, IsNotEmpty, IsString, MinLength } from "class-validator";
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
 
     @IsInt()
     @PrimaryGeneratedColumn()
@@ -26,8 +26,8 @@ export class User {
     @Column()
     password: string;
 
-    @IsDate()
-    @Column()
-    birthay: Date;
+    @IsDateString()
+    @Column({type: 'date', default: '2021-01-01'})
+    birthday: Date;
 
 }
