@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 import { IsDateString, IsEmail, IsInt, IsNotEmpty, IsString, MinLength } from "class-validator";
+import { hashSync, genSaltSync } from 'bcryptjs';
 
 @Entity()
 export class User extends BaseEntity {
@@ -29,5 +30,10 @@ export class User extends BaseEntity {
     @IsDateString()
     @Column({type: 'date', default: '2021-01-01'})
     birthday: Date;
+
+    hashPassword(): void {
+        const salt    = genSaltSync(15);
+        this.password = hashSync(this.password, salt);
+    }
 
 }
