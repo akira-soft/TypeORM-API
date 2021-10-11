@@ -33,7 +33,7 @@ export class Cliente {
     @Column({default: true})
     estado: boolean;
 
-    @OneToOne(() => Persona, persona => persona.cliente, {cascade: true, nullable: false})
+    @OneToOne(() => Persona, persona => persona.cliente, {cascade: true, nullable: false, eager: true})
     @JoinColumn({name: 'idPersona', referencedColumnName: 'id'})
     persona: Persona;
 
