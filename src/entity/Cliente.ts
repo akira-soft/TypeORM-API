@@ -1,4 +1,4 @@
-import { IsDateString, IsInt, IsString } from "class-validator";
+import { IsBoolean, IsEmail, IsInt, IsNotEmpty, IsNumber, IsString, Max, Min, MinLength } from "class-validator";
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
 @Entity()
@@ -8,19 +8,28 @@ export class Cliente {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @IsEmail()
     @Column()
     correoElectronico: string;
 
+    @IsString()
+    @MinLength(1)
+    @IsNotEmpty()
     @Column()
     tipoCliente: string;
 
-    @Column()
+    @IsBoolean()
+    @Column({default: false})
     aplicaDescuento: boolean;
 
+    @IsNumber()
+    @Min(5)
+    @Max(100)
     @Column()
     descuentoMaximo: number;
 
-    @Column()
+    @IsBoolean()
+    @Column({default: true})
     estado: boolean;
 
 }
