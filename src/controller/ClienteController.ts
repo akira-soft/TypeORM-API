@@ -13,9 +13,17 @@ export class ClienteController {
 
     static one = async (request: Request, response: Response) => {
         let clienteRepository = getRepository(Cliente);
-        let client = await clienteRepository.findOne(request.params.id);
 
-        response.status(200).json(client);
+        try {
+
+            let client = await clienteRepository.findOne(request.params.id);
+            
+            client ? response.status(200).json(client) : response.status(404).json('No se encuentra el cliente');
+            
+        } catch (error) {
+            response.status(422).json(error);   
+        }
+
     }
 
     static save = async (request: Request, response: Response) => {
