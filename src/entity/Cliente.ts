@@ -1,5 +1,6 @@
 import { IsBoolean, IsEmail, IsInt, IsNotEmpty, IsNumber, IsString, Max, Min, MinLength } from "class-validator";
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne} from "typeorm";
+import { Persona } from "./Persona";
 
 @Entity('clientes')
 export class Cliente {
@@ -9,7 +10,7 @@ export class Cliente {
     id: number;
 
     @IsEmail()
-    @Column()
+    @Column({unique: true})
     correoElectronico: string;
 
     @IsString()
@@ -31,5 +32,9 @@ export class Cliente {
     @IsBoolean()
     @Column({default: true})
     estado: boolean;
+
+    @OneToOne(() => Persona, persona => persona.cliente, {cascade: true, nullable: false})
+    @JoinColumn({name: 'idPersona', referencedColumnName: 'id'})
+    persona: Persona;
 
 }

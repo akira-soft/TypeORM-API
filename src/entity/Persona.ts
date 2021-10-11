@@ -1,5 +1,6 @@
 import { IsDateString, IsInt, IsNotEmpty, IsString, MinLength } from "class-validator";
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import { Cliente } from "./Cliente";
 
 @Entity('personas')
 export class Persona {
@@ -30,5 +31,8 @@ export class Persona {
     @IsNotEmpty()
     @Column({type: 'date', default: '2020-01-01'})
     fechaNacimiento: Date;
+
+    @OneToOne(() => Cliente, cliente => cliente.persona)
+    cliente: Cliente;
 
 }
