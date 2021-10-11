@@ -1,7 +1,7 @@
 import { IsBoolean, IsEmail, IsInt, IsNotEmpty, IsNumber, IsString, Max, Min, MinLength } from "class-validator";
 import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
-@Entity()
+@Entity('clientes')
 export class Cliente {
 
     @IsInt()

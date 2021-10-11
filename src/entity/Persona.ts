@@ -1,7 +1,7 @@
 import { IsDateString, IsInt, IsNotEmpty, IsString, MinLength } from "class-validator";
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-@Entity()
+@Entity('personas')
 export class Persona {
 
     @IsInt()
