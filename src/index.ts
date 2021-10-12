@@ -13,9 +13,9 @@ createConnection().then(async connection => {
     const app = express();
     
     // use of middlewares
-    app.use(express.json());
     app.use(cors());
     app.use(helmet());
+    app.use(express.json());
 
     // routes
     app.use('/api', ROUTES);
