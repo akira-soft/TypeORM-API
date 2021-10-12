@@ -35,4 +35,16 @@ export class Persona {
     @OneToOne(() => Cliente, cliente => cliente.persona)
     cliente: Cliente;
 
+    constructor(
+        nombre: string,
+        primerApellido: string,
+        segundoApellido: string,
+        fechaNacimiento: Date
+    ) {
+        this.nombre          = nombre;
+        this.primerApellido  = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
 }
