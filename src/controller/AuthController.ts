@@ -22,11 +22,7 @@ export class AuthController {
                 return response.status(401).json({message: 'Email or password incorrect'})
             }
             
-            const token = jwt.sign(
-                { userId: user.id, email: user.email },
-                jwtConfig.jwtSecretKey,
-                {expiresIn: '20m'}
-            );
+            const token = jwt.sign({ userId: user.id, email: user.email }, jwtConfig.jwtSecretKey, {expiresIn: '20m'});
             
             return response.status(200).json({message: 'User autenticated', yourToken: token});
             
