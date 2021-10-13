@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 import { IsDateString, IsEmail, IsInt, IsNotEmpty, IsString, MinLength } from "class-validator";
-import { hashSync, genSaltSync } from 'bcryptjs';
+import { hashSync, genSaltSync, compareSync } from 'bcryptjs';
 
 @Entity()
 export class User extends BaseEntity {
@@ -34,6 +34,10 @@ export class User extends BaseEntity {
     hashPassword(): void {
         const salt    = genSaltSync(15);
         this.password = hashSync(this.password, salt);
+    }
+
+    isCorrectPassword (anotherPassword: string): boolean {
+        return compareSync(anotherPassword, this.password);
     }
 
 }
