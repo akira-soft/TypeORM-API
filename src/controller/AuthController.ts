@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { User } from "../entity/User";
 import * as jwt from "jsonwebtoken";
-import * as jwtConfig from "../config/jwtCondig"
+import jwtConfig from "../config/jwtConfig";
 
 export class AuthController {
 
@@ -24,7 +24,7 @@ export class AuthController {
             
             const token = jwt.sign(
                 { userId: user.id, email: user.email },
-                jwtConfig.default.jwtSecretKey,
+                jwtConfig.jwtSecretKey,
                 {expiresIn: '20m'}
             );
             
